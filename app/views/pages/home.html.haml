@@ -1,0 +1,12 @@
+.container
+  .row
+    .col
+      %h1 Home!
+  .row
+    .col
+      %p This is me ->
+    .col
+      =image_tag 'me.png', class: 'rounded'
+  .row
+    .col
+      =link_to "About", about_path, class: 'btn btn-sm btn-secondary'
