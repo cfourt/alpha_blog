@@ -1,0 +1,20 @@
+%h1 Create an article
+
+-if @article.errors.any?
+  %h2 There were some errors saving
+  %ul
+  -@article.errors.full_messages.each do |msg|
+    %li
+      =msg
+
+=form_for @article do |f|
+  %p
+    =f.label :title
+  %p
+    =f.text_field :title
+  %p
+    =f.label :description
+  %p
+    =f.text_area :description
+  %p
+    =f.submit
