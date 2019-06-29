@@ -1,0 +1,20 @@
+.row
+  .col
+    %h1 Article
+  .col.text-right.mt-3
+    =link_to "New Article", new_article_path, class: 'btn btn-sm btn-primary'
+.row
+  .col
+    %table.table
+      %thead
+        %th.text-center Titles
+        %th.text-center Description
+        %th
+        %th
+
+      -@articles.each do |a|
+        %tr
+          %th=a.title
+          %td=a.description
+          %td=link_to "Show", article_path(a)
+          %td=link_to "Edit", edit_article_path(a)
