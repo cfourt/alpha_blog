@@ -15,6 +15,21 @@
       -@articles.each do |a|
         %tr
           %th=a.title
-          %td=a.description
+          %td
+            =a.description
+            %br
+              %small
+                - if a.user
+                  %span.badge.badge-success
+                    Created by
+                    =a.user.username
+                %span.badge.badge-primary
+                  Made:
+                  =time_ago_in_words a.created_at
+                  ago
+                %span.badge.badge-secondary
+                  Updated:
+                  =time_ago_in_words a.updated_at
+                  ago
           %td=link_to "Show", article_path(a)
           %td=link_to "Edit", edit_article_path(a)
