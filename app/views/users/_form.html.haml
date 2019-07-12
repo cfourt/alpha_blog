@@ -6,11 +6,23 @@
         - @user.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :username
-    = f.text_field :username
-  .field
-    = f.label :email
-    = f.text_field :email
-  .actions
-    = f.submit 'Save'
+  .form-row
+    .col-auto
+      = f.label :username
+      .input-group
+        .input-group-prepend
+          .input-group-text @
+        = f.text_field :username, type: 'text', class: 'form-control', placeholder: 'awesome', autofocus: true
+    .col
+      .field
+        = f.label :email
+        = f.text_field :email, class: 'form-control', placeholder: 'me@awesome.com'
+  .form-row
+    .col
+      .field
+        = f.label :password
+        = f.password_field :password, class: 'form-control', placeholder: 'Enter a good one'
+  .form-row.mt-3
+    .col
+      .actions
+        = f.submit 'Sign Up', class: 'btn btn-primary'
