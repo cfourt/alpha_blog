@@ -1,4 +1,7 @@
 %p#notice= notice
+.row.center-items
+  .col-auto
+    =gravatar_for @user, size:150
 
 %p
   %b Username:
@@ -6,6 +9,15 @@
 %p
   %b Email:
   = @user.email
+
+
+%table
+  - @user.articles.each do |a|
+    %tr
+      %th
+        = a.title
+      %td
+        = a.description
 
 = link_to 'Edit', edit_user_path(@user)
 \|

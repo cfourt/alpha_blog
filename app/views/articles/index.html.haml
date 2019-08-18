@@ -7,8 +7,9 @@
   .col
     %table.table
       %thead
-        %th.text-center Titles
-        %th.text-center Description
+        %th Titles
+        %th Description
+        %th User
         %th
         %th
 
@@ -31,5 +32,6 @@
                   Updated:
                   =time_ago_in_words a.updated_at
                   ago
+          %td=a.user&.username.presence || a.user&.id.presence || 'no user'
           %td=link_to "Show", article_path(a)
           %td=link_to "Edit", edit_article_path(a)
