@@ -1,10 +1,11 @@
 %h1 Article
 
+= render 'article_author', article: @article if @article.user
+
 %h2
   =@article.title
 %p
   =@article.description
-
 
 =link_to "Index", articles_path
 =link_to "Edit this", edit_article_path(@article)
