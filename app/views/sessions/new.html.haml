@@ -1,0 +1,20 @@
+.row
+  .col.text-center
+    %h1 Login
+.row
+  .col
+    = form_for :session, url: login_path do |f|
+      .form-row
+        .col
+          .field
+            = f.label :email
+            = f.text_field :email, class: 'form-control', placeholder: 'Enter email'
+      .form-row
+        .col
+          .field
+            = f.label :password
+            = f.password_field :password, class: 'form-control', autocomplete: 'off', placeholder: 'Password'
+      .form-row.mt-3
+        .col
+          .actions
+            = f.submit 'Sign In', class: 'btn btn-primary'

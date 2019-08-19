@@ -1,4 +1,10 @@
-.dark {
+body {
+  h1 {
+    margin-bottom: 30px;
+  }
+}
+
+body.dark {
   background-color: #333;
   color: #ddd;
 
