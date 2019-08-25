@@ -18,9 +18,9 @@
                 .col
                   %h6.card-subtitle.mb-2.text-muted=user.email
                   .card-text.small
-                    Made:
-                    =time_ago_in_words user.created_at
-                    ago
+                    Articles
+                    %span.badge.badge-primary= user.articles.size
+              -#      todo make this a link later
               -if logged_in? && current_user == user
                 .row.mt-3
                   .col
