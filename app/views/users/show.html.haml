@@ -2,23 +2,10 @@
 .row.text-center
   .col
     =gravatar_for @user, size:150
-.row.text-center.mt-5
+.row.text-center.mt-5.mb-5
   .col
     %h2= @user.username
     %p= @user.email
     = link_to 'Edit', edit_user_path(@user), class: 'btn btn-outline-primary'
 
-.row.mt-5
-  .col
-    %table.table.table-bordered
-      %tr
-        %th
-          Article name
-        %th
-          Description
-      - @user.articles.each do |a|
-        %tr
-          %td
-            = a.title
-          %td
-            = a.description
+=render 'articles/articles', articles: @user.articles

@@ -1,0 +1,12 @@
+-if obj.errors.any?
+  .alert.alert-warning
+    .alert-heading
+      %h4
+        = pluralize(obj.errors.count, 'error')
+        prohibited this article from being saved
+      %hr
+      %p
+        %ul
+        -obj.errors.full_messages.each do |msg|
+          %li
+            =msg

@@ -1,18 +1,20 @@
--if @article.errors.any?
-  %h2 There were some errors saving
-  %ul
-  -@article.errors.full_messages.each do |msg|
-    %li
-      =msg
-
+=render 'shared/errors', obj: @article
 =form_for @article do |f|
-  %p
-    =f.label :title
-  %p
-    =f.text_field :title
-  %p
-    =f.label :description
-  %p
-    =f.text_area :description
-  %p
-    =f.submit
+  .form-row
+    .col-auto
+      .field
+      = f.label :title
+      = f.text_field :title, type: 'text', class: 'form-control', placeholder: 'An engaging title', autofocus: true
+  .form-row.mt-2
+    .col
+      .field
+        = f.label :description
+        = f.text_area :description, class: 'form-control', placeholder: 'Write down some great ideas'
+  .form-row.mt-3
+    .col
+      .actions
+        .row
+          .col.mr-auto
+            = link_to "Cancel", @article.new_record? ? articles_path : article_path(@article), class: 'btn btn-outline-secondary'
+          .col.text-right
+            = f.submit class: 'btn btn-primary'

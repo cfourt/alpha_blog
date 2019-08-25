@@ -1,44 +1,10 @@
 .row
   .col
-    %h1 Article
+    %h1 Articles
   .col.text-right.mt-3
-    =link_to "New Article", new_article_path, class: 'btn btn-sm btn-primary' if logged_in?
-.row
-  .col
-    %table.table
-      %thead
-        %th Titles
-        %th Description
-        %th User
-        %th
-        %th
+    =link_to "New Article", new_article_path, class: 'btn btn-primary' if logged_in?
 
-      -@articles.each do |a|
-        %tr
-          %th=a.title
-          %td
-            =a.description
-            %br
-              %small
-                - if a.user
-                  %span.badge.badge-success
-                    Created by
-                    =a.user.username
-                %span.badge.badge-primary
-                  Made:
-                  =time_ago_in_words a.created_at
-                  ago
-                %span.badge.badge-secondary
-                  Updated:
-                  =time_ago_in_words a.updated_at
-                  ago
-          %td=a.user&.username.presence || a.user&.id.presence || 'no user'
-          -if logged_in? && current_user == a.user
-            %td=link_to "Show", article_path(a)
-            %td=link_to "Edit", edit_article_path(a)
-          -else
-            %td
-            %td
+=render 'articles', articles: @articles
 
 -# this totally isn't centered. w/e
 .row

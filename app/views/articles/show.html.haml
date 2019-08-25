@@ -1,13 +1,17 @@
-%h1 Article
-
-= render 'article_author', article: @article if @article.user
-
-%h2
-  =@article.title
-%p
-  =@article.description
-
-=link_to "Index", articles_path
-- if logged_in? && current_user = @article.user
-  =link_to "Edit this", edit_article_path(@article)
-  =link_to "Delete this", article_path(@article), method: :delete, data: {confirm: 'Are you sure'}
+.row.mb-3
+  .col
+    =link_to "< Back to Articles", articles_path(@article), class: 'btn btn-link btn-sm'
+.row
+  .col
+    %h2.display-3
+      =@article.title
+.row.mb-5
+  .col-sm-2
+    = render 'article_author', article: @article if @article.user
+  .col
+    - if logged_in? && current_user = @article.user
+      =link_to "Edit", edit_article_path(@article), class: 'btn btn-outline-secondary btn-sm mr-3'
+      =link_to "Delete", article_path(@article), method: :delete, data: {confirm: 'Are you sure you want to permanently delete this article?'}, class: 'btn btn-sm btn-outline-danger'
+.row
+  .col
+    %p= @article.description

@@ -1,0 +1,27 @@
+.row
+  .col
+    -articles.each do |a|
+      .card.mb-2
+        .card-body
+          .row
+            .col
+              %h5.card-title= a.title
+            .col.text-right
+              =a.user ? a.user.username : 'anon'
+          %h6.card-subtitle.mb-2.text-muted=a.description
+          - if a.user
+            .row
+              .col
+                .card-text.small
+                  Made:
+                  =time_ago_in_words a.created_at
+                  ago
+                  |
+ Updated:
+                  =time_ago_in_words a.updated_at
+                  ago
+          -if logged_in? && current_user == a.user
+            .row.mt-3
+              .col
+                = link_to "Show", article_path(a), class: 'btn btn-sm btn-outline-primary'
+                = link_to "Edit", edit_article_path(a), class: 'btn btn-sm btn-outline-secondary'

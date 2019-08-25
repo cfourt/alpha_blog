@@ -1,25 +1,30 @@
-%h1 Listing users
+.row
+  .col
+    %h1 Users
+  .col.text-right.mt-3
+    =link_to "New User", signup_path, class: 'btn btn-primary' if logged_in?
 
-%table.table.table-borderless
-  %thead
-    %tr
-      %th
-      %th Username
-      %th Email
-      %th
-      %th
-      %th
-
-  %tbody
+.row
+  .col
     - @users.each do |user|
-      %tr
-        %td= link_to gravatar_for(user, size:40), user
-        %td= user.username
-        %td= user.email
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New User', signup_path
+      .card.mb-2
+        .card-body
+          .row
+            .col.mr-auto
+              .row.mb-2
+                .col
+                  %h5.card-title= user.username
+              .row
+                .col
+                  %h6.card-subtitle.mb-2.text-muted=user.email
+                  .card-text.small
+                    Made:
+                    =time_ago_in_words user.created_at
+                    ago
+              -if logged_in? && current_user == user
+                .row.mt-3
+                  .col
+                    = link_to "Show", user_path(user), class: 'btn btn-sm btn-outline-primary'
+                    = link_to "Edit", edit_user_path(user), class: 'btn btn-sm btn-outline-secondary'
+            .col.text-right
+              = link_to gravatar_for(user, size:80), user

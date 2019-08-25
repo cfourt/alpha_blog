@@ -9,9 +9,6 @@
   = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 %body
   = render 'layouts/nav'
-.container.flash
-  - flash.each do |_, msg|
-    %ul
-      %li.alert= msg
+  = render 'layouts/messages'
 .container
   = yield
