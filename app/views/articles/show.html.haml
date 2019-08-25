@@ -8,5 +8,6 @@
   =@article.description
 
 =link_to "Index", articles_path
-=link_to "Edit this", edit_article_path(@article)
-=link_to "Delete this", article_path(@article), method: :delete, data: {confirm: 'Are you sure'}
+- if logged_in? && current_user = @article.user
+  =link_to "Edit this", edit_article_path(@article)
+  =link_to "Delete this", article_path(@article), method: :delete, data: {confirm: 'Are you sure'}

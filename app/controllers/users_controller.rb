@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         flash[:success] = "User was successfully updated"
-        format.html {redirect_to @user}
+        format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -65,13 +66,20 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :email, :password)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:danger] = "You can only edit your own account"
     end
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :email, :password)
+  end
 end

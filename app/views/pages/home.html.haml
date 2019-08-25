@@ -1,13 +1,8 @@
-.container
+.container.text-center
   .row
     .col
-      %h1 Home!
-  .row
+      =image_tag 'me.png', class: 'rounded-circle', width: '200px'
+  .row.mt-5
     .col
-      %p This is me ->
-    .col
-      =image_tag 'me.png', class: 'rounded'
-  .row
-    .col
-      =link_to "About", about_path, class: 'btn btn-sm btn-secondary'
-      =link_to "Alpha Blog", articles_path, class: 'btn btn-sm btn-secondary'
+      %h1 Welcome!
+      %p There isn't much to see yet but just you wait :)

@@ -1,5 +1,5 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-5
-  %a.navbar-brand{:href => "#"} My App
+  %a.navbar-brand{:href => root_path} My App
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
@@ -7,23 +7,32 @@
       %li.nav-item
         =link_to 'Home', root_path, class: 'nav-link'
       %li.nav-item
-        =link_to 'Articles', articles_path, class: 'nav-link'
+        =link_to 'Blog', articles_path, class: 'nav-link'
       %li.nav-item
-        =link_to 'Users', users_path, class: 'nav-link'
-      -#%li.nav-item.dropdown
-      -#  %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-      -#    Dropdown
-      -#  .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-      -#    %a.dropdown-item{:href => "#"} Action
-      -#    %a.dropdown-item{:href => "#"} Another action
-      -#    .dropdown-divider
-      -#    %a.dropdown-item{:href => "#"} Something else here
+        =link_to 'About', about_path, class: 'nav-link'
+      %li.nav-item.dropdown
+        %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+          Objects
+        .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+          %a.dropdown-item{:href => articles_path} Articles
+          %a.dropdown-item{:href => users_path} Users
+          -#.dropdown-divider
+          -#%a.dropdown-item{:href => "#"} Something else here
       -#%li.nav-item
       -#  %a.nav-link.disabled{"aria-disabled" => "true", :href => "#", :tabindex => "-1"} Disabled
     %ul.navbar-nav.my-lg-0
-      %li.nav-item
-        =link_to 'Login', login_path, class: 'nav-link'
-      %li.nav-item
-        =link_to 'Logout', logout_path, method: :delete, class: 'nav-link'
-      -#%input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
-      -#%button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
+      -if !logged_in?
+        %li.nav-item
+          =link_to 'Login', login_path, class: 'nav-link'
+        %li.nav-item
+          =link_to 'Signup', signup_path, class: 'nav-link'
+      -else
+        %li.nav-item.dropdown
+          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            ="Hi, #{current_user.username}"
+          .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+            %a.dropdown-item{:href => user_path(current_user)} View Profile
+            -#.dropdown-divider
+          -#%a.dropdown-item{:href => "#"} Something else here
+        %li.nav-item
+          =link_to 'Logout', logout_path, method: :delete, class: 'nav-link'

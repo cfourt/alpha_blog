@@ -1,24 +1,24 @@
 %p#notice= notice
-.row.center-items
-  .col-auto
+.row.text-center
+  .col
     =gravatar_for @user, size:150
+.row.text-center.mt-5
+  .col
+    %h2= @user.username
+    %p= @user.email
+    = link_to 'Edit', edit_user_path(@user), class: 'btn btn-outline-primary'
 
-%p
-  %b Username:
-  = @user.username
-%p
-  %b Email:
-  = @user.email
-
-
-%table
-  - @user.articles.each do |a|
-    %tr
-      %th
-        = a.title
-      %td
-        = a.description
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+.row.mt-5
+  .col
+    %table.table.table-bordered
+      %tr
+        %th
+          Article name
+        %th
+          Description
+      - @user.articles.each do |a|
+        %tr
+          %td
+            = a.title
+          %td
+            = a.description

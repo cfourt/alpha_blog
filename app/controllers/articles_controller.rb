@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def new
     @article = Article.new
@@ -35,13 +37,20 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.paginate(page: params[:page], per_page: 2)
+    @articles = Article.paginate(page: params[:page], per_page: 20)
   end
 
   def destroy
     @article.destroy
     flash[:success] = "Articles was successfully deleted"
     redirect_to articles_path
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:danger] = "You can only edit/delete your own article"
+      redirect_to root_path
+    end
   end
 
   private
