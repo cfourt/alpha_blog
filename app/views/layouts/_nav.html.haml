@@ -31,8 +31,8 @@
           %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             ="Hi, #{current_user.username}"
           .dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-            %a.dropdown-item{:href => user_path(current_user)} View Profile
-            -#.dropdown-divider
-          -#%a.dropdown-item{:href => "#"} Something else here
+            %a.dropdown-item{href: user_path(current_user)}
+              View Profile
+              = content_tag :span, "admin", class: 'badge badge-dark mr-1' if current_user.admin?
         %li.nav-item
           =link_to 'Logout', logout_path, method: :delete, class: 'nav-link'

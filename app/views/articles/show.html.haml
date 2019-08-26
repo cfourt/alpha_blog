@@ -9,7 +9,7 @@
   .col-sm-2
     = render 'article_author', article: @article if @article.user
   .col
-    - if logged_in? && current_user = @article.user
+    - if logged_in? && (current_user == @article.user || current_user.admin?)
       =link_to "Edit", edit_article_path(@article), class: 'btn btn-outline-secondary btn-sm mr-3'
       =link_to "Delete", article_path(@article), method: :delete, data: {confirm: 'Are you sure you want to permanently delete this article?'}, class: 'btn btn-sm btn-outline-danger'
 .row

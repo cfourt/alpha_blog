@@ -20,7 +20,7 @@
                   Updated:
                   =time_ago_in_words a.updated_at
                   ago
-          -if logged_in? && current_user == a.user
+          -if logged_in? && (current_user == a.user || current_user.admin?)
             .row.mt-3
               .col
                 = link_to "Show", article_path(a), class: 'btn btn-sm btn-outline-primary'
